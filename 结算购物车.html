@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<script src="js/jquery.min.js"></script>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			$(function(){
+				//全选按钮
+			
+			let allcheck=$(".all-num>em");
+			let check=$(".shop-check>em");
+			allcheck.click(function(){
+				if($(this).hasClass('product-em') && check.hasClass('product-em')){
+					$(this).removeClass('product-em');
+					check.removeClass('product-em');
+				}else{
+					$(this).addClass('product-em');
+					check.addClass('product-em');
+				}
+				
+				total();
+			});
+			
+			//单选按钮
+			check.click(function(){
+				if($(this).hasClass('product-em')){
+					$(this).removeClass('product-em');
+					allcheck.removeClass('product-em')
+				}else{
+					$(this).addClass('product-em')
+				}
+				total();
+				
+			})
+				//加
+				$(".product-add").click(function(){
+					let n=$(this).prev().val();
+					let num=parseInt(n)+1;
+					$(this).prev().val(num);
+					total();
+				});
+				
+				
+				//减
+				$(".product-jian").click(function(){
+					let n=$(this).next().val();
+					let num=parseInt(n)-1;
+					total();
+					if(n==1){
+						return;
+					}
+					$(this).next().val(num);
+					total();
+				});
+				
+				
+				//删除
+				$(".del").click(function(){
+				if(confirm("您确定要删除当前商品？")){
+					$(this).closest('.box-wrap').remove();
+					total();
+				}
+				total();
+				})
+				
+				//计算总价格
+				function total(){
+					//总价
+					var total=0;
+					
+ 					$(".shop-check").each(function(){
+ 						if($(".shop-check>em").is('.product-em')){
+ 					var price=parseInt($(this).siblings('.shop-inner').find('.price').text());
+					var num=parseInt($(this).siblings(".all-product").find('.product-num').val());
+ 					var allprice=price*num;
+ 					
+ 					total+=allprice;
+					
+ 						}
+						
+ 						$(".all-price").text(total);
+					 });
+					 
+				}
+				
+				
+			})
+		</script>
+
+	</head>
+	<body>
+		<div class="body">
+			<div class="shop-header">
+				<h2>我的购物车</h2>
+			</div>
+			<div class="box">
+				<div class="box-wrap">
+					<div class="shop-check">
+						<em></em>
+					</div>
+					<div class="shop-img">
+						<img src="img/a3.png">
+					</div>
+					<div class="shop-inner">
+						<span>酷冷至尊(Cooler Master)T610P CPU风冷散热器</span>
+						¥<p class="price"> 296</p>
+					</div>
+					<span class="del">
+
+					</span>
+					<div class="all-product">
+						<em class="product-jian">-</em>
+						<input type="text" value="1" class="product-num" /><em class="product-add">+</em>
+					</div>
+				</div>
+
+				<div class="box-wrap">
+					<div class="shop-check">
+						<em></em>
+					</div>
+					<div class="shop-img">
+						<img src="img/a1.png">
+					</div>
+					<div class="shop-inner">
+						<span>技嘉（GIGABYTE） 2080TURBO OC 8GC</span>
+						¥<p class="price"> 296</p>
+					</div>
+					<span class="del">
+
+					</span>
+					<div class="all-product">
+						<em class="product-jian">-</em>
+						<input type="text" value="1" class="product-num" /><em class="product-add">+</em>
+					</div>
+				</div>
+
+
+
+
+				<div class="box-wrap">
+					<div class="shop-check">
+						<em></em>
+					</div>
+					<div class="shop-img">
+						<img src="img/a2.png">
+					</div>
+					<div class="shop-inner">
+						<span>游戏悍将 35英寸曲面电竞显示器21:9带鱼屏准4K游戏显示器</span>
+						¥<p class="price"> 296</p>
+					</div>
+					<span class="del">
+
+					</span>
+					<div class="all-product">
+						<em class="product-jian">-</em>
+						<input type="text" value="1" class="product-num" /><em class="product-add">+</em>
+					</div>
+				</div>
+
+
+
+				<div class="box-wrap">
+					<div class="shop-check">
+						<em></em>
+					</div>
+					<div class="shop-img">
+						<img src="img/a4.png">
+					</div>
+					<div class="shop-inner">
+						<span>AMD 锐龙 5 2600X 处理器 (R5) 6核12线程 AM4</span>
+						¥<p class="price"> 296</p>
+					</div>
+					<span class="del">
+
+					</span>
+					<div class="all-product">
+						<em class="product-jian">-</em>
+						<input type="text" value="1" class="product-num" /><em class="product-add">+</em>
+					</div>
+				</div>
+
+				<div class="all">
+					<div class="all-num">
+						<em></em>
+
+					</div>
+					<div class="quan">
+						全选
+					</div>
+					<div class="allprice">
+						¥<span class="all-price">
+							 0.00
+						</span>
+						<button type="button" class="btn">
+							结算
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
